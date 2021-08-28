@@ -21,8 +21,8 @@
 
 letter = [A-Za-z]
 digits = [0-9]
-new_line = \n
-id = ({letter}{digits}"_")*
+new_line = \n|\r|\n\r
+id = {letter}+{letter}*{digit}*"_"?{letter}*{digit}*
 
 %%
 
