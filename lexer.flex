@@ -87,6 +87,7 @@ LOGIC_OP = "and"|"or"|"xor"|"xand"
 	"when"        	{System.out.println(yytext() +"\t\t <WHEN>"); }//return symbol(sym.When);}
 	"exit"        	{System.out.println(yytext() +"\t\t <EXIT>"); }//return symbol(sym.Exit);}
 	"not"         	{System.out.println(yytext() +"\t\t <NOT>"); }//return symbol(sym.Not);}
+	"new_line"      {System.out.println(yytext() +"\t\t <NEW_LINE>"); }//return symbol(sym.Not);}
 	{colon}			{System.out.println(yytext() +"\t\t <COLON>"); }//return symbol(sym.COLON);}
 	{comma}			{System.out.println(yytext() +"\t\t <COMMA>"); }//return symbol(sym.COMMA);}
 	{semicolon}		{System.out.println(yytext() +"\t\t <SEMIC>"); }//return symbol(sym.SEMIC);}
