@@ -56,9 +56,16 @@ STRING = \"({letter}|{digits}|{space})*\"
 ASSIGN = ":="
 ADD = "+" | "-"
 MULT = "*"|"/"|"mod"| "rem" 
-BOOL = "true" | "false"
 RELATE = ">" | "<" | "==" | ">=" | "<=" | "/="
 LOGIC_OP = "and"|"or"|"xor"|"xand"
+
+
+//tipos
+INTEGER = "Integer"
+FLOAT = "Float"
+BOOL = "true" | "false"
+Int = {INTEGER}{space}{ASSIGN}{space}{digits}
+Float = {FLOAT}{space}{ASSIGN}{space}{digits}
 
 
 %%
@@ -96,6 +103,8 @@ LOGIC_OP = "and"|"or"|"xor"|"xand"
 	{NUMBER}		{System.out.println(yytext() +"\t\t <NUMBER>"); }//return symbol(sym.NUMBER);}
 	{DECIMALS}		{System.out.println(yytext() +"\t\t <DECIMALS>"); }//return symbol(sym.DECIMALS);}
 
+	//tipo
+	{Int}			{System.out.println(yytext() +"\t\t <Int>"); }//return symbol(sym.INT);}
 
 	// Operators
 	{equal}			{System.out.println(yytext() +"\t\t <EQUAL>"); }//return symbol(sym.EQUAL);}

@@ -1,47 +1,48 @@
-procedure		 <PROCEDURE>
-OneInt		 <ID>
-is		 <IS>
-Index		 <ID>
-:		 <COLON>
-INTEGER		 <ID>
-;		 <SEMIC>
-begin		 <BEGIN>
-Index		 <ID>
-:=		 <ASSIGN OPERATOR>
-23		 <NUMBER>
-;		 <SEMIC>
-Put		 <PUT>
-(		 <LEFTP>
-"The value of Index is"		 <STRING>
-)		 <RIGHTP>
-;		 <SEMIC>
-Put		 <PUT>
-(		 <LEFTP>
-Index		 <ID>
-)		 <RIGHTP>
-;		 <SEMIC>
-New_Line		 <NEW_LINE>
-;		 <SEMIC>
-Index		 <ID>
-:=		 <ASSIGN OPERATOR>
-Index		 <ID>
-+		 <ADDING OPERATOR>
-12		 <NUMBER>
-;		 <SEMIC>
-Put		 <PUT>
-(		 <LEFTP>
-"The value of Index is"		 <STRING>
-)		 <RIGHTP>
-;		 <SEMIC>
-Put		 <PUT>
-(		 <LEFTP>
-Index		 <ID>
-,		 <COMMA>
-8		 <NUMBER>
-)		 <RIGHTP>
-;		 <SEMIC>
-New_Line		 <NEW_LINE>
-;		 <SEMIC>
-end		 <END>
-OneInt		 <ID>
-;		 <SEMIC>
+procedure                <PROCEDURE>
+OneInt           <ID>
+is               <IS>
+Index            <ID>
+:                <COLON>
+INTEGER          <ID>
+;                <SEMIC>
+begin            <BEGIN>
+Index            <ID>
+:=               <ASSIGN OPERATOR>
+23               <NUMBER>
+;                <SEMIC>
+Put              <PUT>
+(                <LEFTP>
+"The value of Index is"          <STRING>
+)                <RIGHTP>
+;                <SEMIC>
+Put              <PUT>
+(                <LEFTP>
+Index            <ID>
+)                <RIGHTP>
+;                <SEMIC>
+New_Line                 <NEW_LINE>
+;                <SEMIC>
+Index            <ID>
+:=               <ASSIGN OPERATOR>
+Index            <ID>
++                <ADDING OPERATOR>
+12               <NUMBER>
+;                <SEMIC>
+Put              <PUT>
+(                <LEFTP>
+"The value of Index is"          <STRING>
+)                <RIGHTP>
+;                <SEMIC>
+Put              <PUT>
+(                <LEFTP>
+Index            <ID>
+,                <COMMA>
+8                <NUMBER>
+)                <RIGHTP>
+;                <SEMIC>
+New_Line                 <NEW_LINE>
+;                <SEMIC>
+Integer := 2             <Int>
+end              <END>
+OneInt           <ID>
+;                <SEMIC>
