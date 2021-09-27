@@ -100,10 +100,18 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
     public static ArrayList<String> syntaxErrors = new ArrayList<String>();
-    public void syntaxError(Symbol sm){
+    public static ArrayList<String> unrecoveredErrors = new ArrayList<String>();
+    
+    public void syntax_error(Symbol sm){
         System.out.println("Syntax Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
         syntaxErrors.add("Syntax Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
     }
+
+    public void unrecovered_syntax_error(Symbol sm){
+        System.out.println("Unrecoverable Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
+        unrecoveredErrors.add("Unrecoverable Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
+    }
+    
     public static Node tree;
     public static int count = 0;
     public static int temp = 0;
