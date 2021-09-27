@@ -6,9 +6,12 @@ parser code
 {:
     public static ArrayList<String> syntaxErrors = new ArrayList<String>();
     public void syntaxError(Symbol sm){
-        System.out.println("Syntax Error: \""+ sm.value + "\" Linea: " + (sm.right+1) + " Columna: " + (sm.left+1));
-        syntaxErrors.add("Syntax Error: \""+ sm.value + "\" Linea: " + (sm.right+1) + " Columna: " + (sm.left+1));
+        System.out.println("Syntax Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
+        syntaxErrors.add("Syntax Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
     }
+    public static Node tree;
+    public static int count = 0;
+    public static int temp = 0;
 :}
 
 /* Terminals */
@@ -21,7 +24,7 @@ terminal EQUAL, ASSIGN, LOGIC_OP, RELATE, MULT, ADD, LEFTP, RIGHTP, NOT;
 
 
 /* No terminals */
-non terminal INIT, MAIN;
+non terminal INIT, MAIN, ROOT, PROGRAM;
 
 
 /* Operators precedence */
@@ -34,7 +37,25 @@ precedence left MULT;
 
 start with INIT;
 
-INIT                 ::=   MAIN:root   {: System.out.println("Hi"); RESULT=1;:}
-                            ;
-MAIN                ::=   PROCEDURE:node1 ID:node2 IS:node3 {:System.out.println("Hi 2"); RESULT=2;:}
-                            ;
+INIT                    ::=   ROOT:child   {: 
+                                /*Utilizado para declarar el nodo padre o root*/
+                                Node node = new Node("ROOT",count);
+                                count++;
+                                node.pushChild((Node) child);
+                                parser.tree = (Node) node;
+                                RESULT = node;
+                            :}
+                        ;
+
+ROOT                    ::= PROCEDURE ID:no2 IS MAIN:child1 BEGIN PROGRAM:child2 END ID SEMIC {:
+                                Node startP = new Node("MAIN", count);
+                                count++;
+                                Node nodeID = new Node("ID", no2.toString(),count);
+                                count++;
+                                nodeID.pushChild(child1);
+                                nodeID.pushChild(child2);
+                                startP.pushChild(nodeID);               
+                                RESULT = startP;
+                            :}
+                        |error SEMIC
+                        ;
