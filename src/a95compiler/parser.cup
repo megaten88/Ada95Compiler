@@ -33,6 +33,7 @@ terminal EQUAL, ASSIGN, LOGIC_OP, RELATE, MULT, ADD, LEFTP, RIGHTP, NOT;
 
 /* No terminals */
 non terminal INIT, MAIN, ROOT, PROGRAM;
+non terminal T_PARAMETROS, T_VARIABLES;
 
 
 /* Operators precedence */
@@ -67,3 +68,28 @@ ROOT                    ::= PROCEDURE ID:no2 IS MAIN:child1 BEGIN PROGRAM:child2
                             :}
                         |error SEMIC
                         ;
+
+//Grammar Parametros
+
+T_VARIABLES::= INTEGER:i {:
+                    RESULT = i;
+                :}
+                | FLOAT:f{:
+                    RESULT = f;
+                :}
+                | BOOL:b{:
+                    RESULT = b;
+                :}
+                | error {: syntaxErrors.add("Los tipos de datos permitidos son INTEGER, FLOAT y BOOLEAN. "); :}
+;
+
+T_PARAMETROS::= IN:ti {:
+                    RESULT = ti;
+                :}
+                | OUT:to {:
+                    RESULT = to;
+                :}
+                | IN_OUT:tio {:
+                    RESULT = tio;
+                :}
+                | error {: syntaxErrors.add("Los tipos de parámetros permitidos son in, out e inout. "); :}
