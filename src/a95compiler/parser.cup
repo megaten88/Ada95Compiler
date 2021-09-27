@@ -52,8 +52,8 @@ ROOT                    ::= PROCEDURE ID:no2 IS MAIN:child1 BEGIN PROGRAM:child2
                                 count++;
                                 Node nodeID = new Node("ID", no2.toString(),count);
                                 count++;
-                                nodeID.pushChild(child1);
-                                nodeID.pushChild(child2);
+                                nodeID.pushChild((Node)child1);
+                                nodeID.pushChild((Node)child2);
                                 startP.pushChild(nodeID);               
                                 RESULT = startP;
                             :}

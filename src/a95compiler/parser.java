@@ -32,8 +32,8 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\003\000\002\002\004\000\002\002\003\000\002\003" +
-    "\005" });
+    "\000\004\000\002\002\004\000\002\002\003\000\002\004" +
+    "\013\000\002\004\004" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -41,10 +41,13 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\007\000\004\004\004\001\002\000\004\024\010\001" +
-    "\002\000\004\002\007\001\002\000\004\002\000\001\002" +
-    "\000\004\002\001\001\002\000\004\007\011\001\002\000" +
-    "\004\002\uffff\001\002" });
+    "\000\017\000\006\003\006\004\004\001\002\000\004\024" +
+    "\012\001\002\000\004\002\011\001\002\000\004\041\010" +
+    "\001\002\000\004\002\000\001\002\000\004\002\ufffe\001" +
+    "\002\000\004\002\001\001\002\000\004\007\013\001\002" +
+    "\000\002\001\002\000\004\010\015\001\002\000\002\001" +
+    "\002\000\004\011\017\001\002\000\004\024\020\001\002" +
+    "\000\004\041\021\001\002\000\004\002\uffff\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -52,9 +55,12 @@ public class parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\007\000\006\002\004\003\005\001\001\000\002\001" +
+    "\000\017\000\006\002\004\004\006\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001" });
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\004\003\013\001\001\000\002\001\001\000\004\005\015" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -95,9 +101,12 @@ public class parser extends java_cup.runtime.lr_parser {
 
     public static ArrayList<String> syntaxErrors = new ArrayList<String>();
     public void syntaxError(Symbol sm){
-        System.out.println("Syntax Error: \""+ sm.value + "\" Linea: " + (sm.right+1) + " Columna: " + (sm.left+1));
-        syntaxErrors.add("Syntax Error: \""+ sm.value + "\" Linea: " + (sm.right+1) + " Columna: " + (sm.left+1));
+        System.out.println("Syntax Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
+        syntaxErrors.add("Syntax Error: \""+ sm.value + "\" in line: " + (sm.right+1) + " column: " + (sm.left+1));
     }
+    public static Node tree;
+    public static int count = 0;
+    public static int temp = 0;
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -139,32 +148,57 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // INIT ::= MAIN 
+          case 1: // INIT ::= ROOT 
             {
               Object RESULT =null;
-		int rootleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int rootright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		Object root = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 System.out.println("Hi"); RESULT=1;
+		int childleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int childright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object child = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 
+                                /*Utilizado para declarar el nodo padre o root*/
+                                Node node = new Node("ROOT",count);
+                                count++;
+                                node.pushChild((Node) child);
+                                parser.tree = (Node) node;
+                                RESULT = node;
+                            
               CUP$parser$result = parser.getSymbolFactory().newSymbol("INIT",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // MAIN ::= PROCEDURE ID IS 
+          case 2: // ROOT ::= PROCEDURE ID IS MAIN BEGIN PROGRAM END ID SEMIC 
             {
               Object RESULT =null;
-		int node1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
-		int node1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
-		Object node1 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		int node2left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
-		int node2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		Object node2 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		int node3left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
-		int node3right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
-		Object node3 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		System.out.println("Hi 2"); RESULT=2;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("MAIN",1, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		int no2left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
+		int no2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
+		Object no2 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		int child1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).left;
+		int child1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)).right;
+		Object child1 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-5)).value;
+		int child2left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int child2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		Object child2 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		
+                                Node startP = new Node("MAIN", count);
+                                count++;
+                                Node nodeID = new Node("ID", no2.toString(),count);
+                                count++;
+                                nodeID.pushChild((Node)child1);
+                                nodeID.pushChild((Node)child2);
+                                startP.pushChild(nodeID);               
+                                RESULT = startP;
+                            
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("ROOT",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // ROOT ::= error SEMIC 
+            {
+              Object RESULT =null;
+
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("ROOT",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
