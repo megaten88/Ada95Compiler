@@ -39,8 +39,8 @@ start with INIT;
 
 INIT                    ::=   ROOT:child   {: 
                                 /*Utilizado para declarar el nodo padre o root*/
-                                Node node = new Node("ROOT",count);
-                                count++;
+                                Node node = new Node("ROOT",parser.count);
+                                parser.count++;
                                 node.pushChild((Node) child);
                                 parser.tree = (Node) node;
                                 RESULT = node;
@@ -48,10 +48,10 @@ INIT                    ::=   ROOT:child   {:
                         ;
 
 ROOT                    ::= PROCEDURE ID:no2 IS MAIN:child1 BEGIN PROGRAM:child2 END ID SEMIC {:
-                                Node startP = new Node("MAIN", count);
-                                count++;
-                                Node nodeID = new Node("ID", no2.toString(),count);
-                                count++;
+                                Node startP = new Node("MAIN", parser.count);
+                                parser.count++;
+                                Node nodeID = new Node("ID", no2.toString(),parser.count);
+                                parser.count++;
                                 nodeID.pushChild((Node)child1);
                                 nodeID.pushChild((Node)child2);
                                 startP.pushChild(nodeID);               

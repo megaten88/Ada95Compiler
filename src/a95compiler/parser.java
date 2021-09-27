@@ -156,8 +156,8 @@ class CUP$parser$actions {
 		Object child = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		 
                                 /*Utilizado para declarar el nodo padre o root*/
-                                Node node = new Node("ROOT",count);
-                                count++;
+                                Node node = new Node("ROOT",parser.count);
+                                parser.count++;
                                 node.pushChild((Node) child);
                                 parser.tree = (Node) node;
                                 RESULT = node;
@@ -180,10 +180,10 @@ class CUP$parser$actions {
 		int child2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
 		Object child2 = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
 		
-                                Node startP = new Node("MAIN", count);
-                                count++;
-                                Node nodeID = new Node("ID", no2.toString(),count);
-                                count++;
+                                Node startP = new Node("MAIN", parser.count);
+                                parser.count++;
+                                Node nodeID = new Node("ID", no2.toString(),parser.count);
+                                parser.count++;
                                 nodeID.pushChild((Node)child1);
                                 nodeID.pushChild((Node)child2);
                                 startP.pushChild(nodeID);               
